@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>Document</title>
+<style>
+#div1{
+    height: 100%;
+    width: 100%;
+}
+body{
+    margin: 0;
+    
+}
+.circle{
+     border-radius: 50%;
+     height: 100px;
+     width: 100px;
+     position: absolute;
+    
+    }
+</style>
+
+</head>
+
+<body>
+
+    <div class="container" id="div1"></div>
+
+<script>
+
+  window.onload = ()=>{
+
+        for(var i = 0;i<100;i++){
+            let divv = document.getElementById("div1");
+            let w = document.createElement('div')
+            
+            //string na id pileczki
+            let circle_id = new String("circle"+i);
+            w.setAttribute('id',circle_id);
+
+            w.setAttribute("class","circle");
+
+            let r = Math.round(Math.random()*255);
+            let g = Math.round(Math.random()*255);
+            let b = Math.round(Math.random()*255);
+
+            let mh = Math.round(Math.random()*(100));
+            let mw = Math.round(Math.random()*(100));
+
+            let rgb = new String("rgb("+r+","+g+","+b+")");
+            let posh = new String(mh+"%")
+            let posw = new String(mw+"%");
+
+            console.log(r,g,b);
+            console.log(rgb);
+            w.style.backgroundColor = rgb;
+            w.style.marginTop = posh;
+            w.style.left = posw;
+
+            
+            
+
+            w.addEventListener("click",()=>{
+                let r1 = Math.round(Math.random()*255);
+                let g1 = Math.round(Math.random()*255);
+                let b1 = Math.round(Math.random()*255);
+                let rgb1 = new String("rgb("+r1+","+g1+","+b1+")");
+                //w.style.backgroundColor=rgb1;
+
+                let ok = window.event;
+
+
+                document.onclick = function(e) { 
+                var x = e.clientX; 
+                var y = e.clientY; 
+                
+                let el_left = w.offsetLeft;
+                let el_high = w.offsetTop;
+
+                
+                let odl = Math.sqrt(((el_left-x)*(el_left-x))+((el_high-y)*(el_high-y)));
+
+
+                
+
+                console.log(odl);
+               
+                }
+                
+
+
+                
+            })
+
+            divv.appendChild(w);  
+            var x = $(w).position();
+            
+            
+        }
+
+        
+
+
+    };
+
+</script>
+    
+</body>
+</html>
