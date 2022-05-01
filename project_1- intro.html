@@ -21,8 +21,16 @@ body{
      height: 100px;
      width: 100px;
      position: absolute;
-    
+     transition: 500ms linear;
     }
+.in_circle{
+    position:relative;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    transition: 500ms linear;
+
+}
 </style>
 
 </head>
@@ -37,13 +45,16 @@ body{
 
         for(var i = 0;i<100;i++){
             let divv = document.getElementById("div1");
-            let w = document.createElement('div')
-            
+            let w = document.createElement('div');
+
             //string na id pileczki
             let circle_id = new String("circle"+i);
             w.setAttribute('id',circle_id);
 
             w.setAttribute("class","circle");
+
+
+
 
             let r = Math.round(Math.random()*255);
             let g = Math.round(Math.random()*255);
@@ -58,39 +69,103 @@ body{
 
             console.log(r,g,b);
             console.log(rgb);
+
             w.style.backgroundColor = rgb;
             w.style.marginTop = posh;
             w.style.left = posw;
 
+
+            let w2 = document.createElement('div');
+            w2.setAttribute("class","in_circle");
+            w.appendChild(w2);
+
+
+
             
             
 
-            w.addEventListener("click",()=>{
+            w2.addEventListener("click",(e)=>{
                 let r1 = Math.round(Math.random()*255);
                 let g1 = Math.round(Math.random()*255);
                 let b1 = Math.round(Math.random()*255);
-                let rgb1 = new String("rgb("+r1+","+g1+","+b1+")");
-                //w.style.backgroundColor=rgb1;
 
+                //let rgb1 = new String("rgb("+r1+","+g1+","+b1+")");
+
+               // w.style.backgroundColor=rgb1;
                 let ok = window.event;
 
 
-                document.onclick = function(e) { 
-                var x = e.clientX; 
-                var y = e.clientY; 
-                
-                let el_left = w.offsetLeft;
-                let el_high = w.offsetTop;
-
-                
-                let odl = Math.sqrt(((el_left-x)*(el_left-x))+((el_high-y)*(el_high-y)));
-
-
-                
-
-                console.log(odl);
                
+                var xx = e.clientX; 
+                var yy = e.clientY; 
+
+                
+                
+                let el_left = w2.offsetLeft+50;
+                let el_high = w2.offsetTop+50;
+
+
+                let _x = Math.abs(el_left-xx);
+                let _y = Math.abs(el_high - yy);
+
+            
+               
+
+                const rect = w2.getBoundingClientRect();
+
+                console.log(rect);
+         
+
+                x = ((e.clientX - rect.left) / (rect.right - rect.left)) * 100;
+                y = ((e.clientY - rect.top) / (rect.bottom - rect.top)) * 100;
+
+
+                
+
+
+                console.log(x + "," +y);
+
+                let mh_f = Math.round(Math.random()*(100));
+                let mw_f = Math.round(Math.random()*(33));
+                
+
+
+                if(x<50&&y<50){
+                    w.style.backgroundColor = "green";
+                    w.style.marginTop = mh_f +"%";
+                    w.style.marginLeft = mw_f  +"%";
+                    w2.style.marginTop = mh_f +"%";
+                    w2.style.marginLeft = mw_f  +"%";
+                }else if(x<=50&&y>=50){
+                    w.style.backgroundColor = "red";
+                    w.style.marginTop = mh_f +"%";
+                    w.style.marginLeft = mw_f  +"%";
+                    w2.style.marginTop = mh_f +"%";
+                    w2.style.marginLeft = mw_f  +"%";
+                }else if(x>=50&&y<=50){
+                    w.style.backgroundColor = "blue";
+                    w.style.marginTop = mh_f +"%";
+                    w.style.marginLeft = mw_f  +"%";
+                    w2.style.marginTop = mh_f +"%";
+                    w2.style.marginLeft = mw_f  +"%";
+                }else if(x>50&&y>50){
+                    w.style.backgroundColor = "purple";
+                    w.style.marginTop = mh_f +"%";
+                    w.style.marginLeft = mw_f  +"%";
+                    w2.style.marginTop = mh_f +"%";
+                    w2.style.marginLeft = mw_f  +"%";
                 }
+
+
+                
+
+                
+
+
+
+
+               
+             
                 
 
 
